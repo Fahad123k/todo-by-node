@@ -1,0 +1,89 @@
+<!-- partialize our app  -->
+
+<!-- include header  by partializing method -->
+
+<style>
+    /* for coloring different category */
+
+
+    #Personal {
+        background-color: blueviolet;
+    }
+
+    #Study {
+        background-color: hsla(240, 100%, 50%, 0.534);
+    }
+
+    #School {
+        background-color: rgb(194, 15, 15);
+    }
+
+    #Cleaning {
+        background-color: rgb(0, 109, 128);
+    }
+
+    #Work {
+        background-color: green;
+    }
+
+    #Training {
+        background-color: rgb(128, 126, 0);
+    }
+
+    #Other {
+        background-color: rgb(128, 0, 60);
+    }
+</style>
+
+<%- include("./partials/header") %>
+    <nav class="navbar navbar-light bg-light ml-5">
+        <a class="navbar-brand" href="/">Todo App</a>
+    </nav>
+
+    <div class="container  mt-5">
+        <form action="/add/todo" method="POST" class="d-flex">
+            <input type="text" name="todo" class="form-control p-10" placeholder="Enter Todo" required>
+
+            <input type="date" name="dueDate" class="form-control" placeholder="Due Date" required>
+
+            <!-- <label for="cars">Todo-Types:</label> -->
+            <select name="category" id="select" class="btn btn-md btn-secondary mx-2" value="Other">
+                <option value="Personal" id="primary">Personal</option>
+                <option value="Study" id="secondary">Study</option>
+                <option value="School" id="success">School</option>
+                <option value="Cleaning" id="danger">Cleaning</option>
+                <option value="Office" id="warning">Work</option>
+                <option value="Training" id="info">Training</option>
+                <option value="Other" id="light">Other</option>
+            </select>
+            <input type="submit" value="Add Todo" class="btn btn-md btn-primary mx-2">
+        </form>
+
+
+        <ul class="list-group my-5">
+            <% todo.forEach(todos=> { %>
+                <li class="list-group-item">
+                    <div class="container">
+                        <!-- <span><input type="checkbox" name="select" id="select" class="btn btn-md btn-primary"></span> -->
+                        <!-- <span><input class="check" type="checkbox" name="id" value="<%= todos._id %>"
+                                id="<%= todos._id %>" /></span> -->
+
+                        <span>
+                            <p><b><%= todos.todo %></b></p>
+                                <input type="button" value="<%= todos.category %>" class="btn btn-md "
+                                    id="<%= todos.category %>">
+                                    
+                                <input type="button" value="<%= todos.dueDate %>" class="btn btn-md " disabled>
+                                <a href="/delete/todo/<%= todos._id %>" class="btn btn-danger btn-sm">Delete</a>
+                        </span>
+                    </div>
+                </li>
+                <% }) %>
+
+        </ul>
+    </div>
+
+
+
+    <!-- include footer  by partializing method -->
+    <%- include("./partials/footer
